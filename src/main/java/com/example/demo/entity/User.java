@@ -5,7 +5,7 @@ import java.util.Set;
 @Table
 public class User{
     @Id
-    @GeneratedValue(Strategy=GenerationType.IDENTITY
+    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private long id;
     private String username;
     private String email;
@@ -15,5 +15,15 @@ public class User{
     public User(){
 
     }
-    public User
+    public User{
+        this.id=id;
+        this.username=username;
+        this.email=email;
+        this.password=password;
+        this.roles=roles;
+    }
+    public long setId(){
+        return id;
+    }
+    
 }
