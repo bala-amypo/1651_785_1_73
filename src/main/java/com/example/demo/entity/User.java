@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 import jakarta.persistence.*;
+import java.util.Set;
 @Entity
 public class User{
     @Id
@@ -12,13 +13,17 @@ public class User{
 
     }
     public User(long id,String username,Set<Role> roles){
-        public long getId(){
-            return id;
-        }
-        public void setId(long id){
-            this.id=id;
-        }
-        public String getUsername(){
+        this.id=id;
+        this.username=username;
+        this.roles=roles;
+    }
+    public long getId(){
+        return id;
+    }
+    public void setId(long id){
+        this.id=id;
+    }
+    public String getUsername(){
             return username;
         }
         public void setUsername(String username){
@@ -30,5 +35,4 @@ public class User{
         public void setRoles(){
             this.roles=roles;
         }
-    }
 }
