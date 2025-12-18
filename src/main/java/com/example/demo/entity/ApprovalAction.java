@@ -5,5 +5,5 @@ import java.time.LocalDateTime;
 @Table
 public class ApprovalAction{
     @Id
-    @GeneratedValue(strategy)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 }
