@@ -24,15 +24,15 @@ public class User{
         this.id=id;
     }
     public String getUsername(){
-            return username;
-        }
-        public void setUsername(String username){
-            this.username=username;
-        }
-        public Set<Role> getRoles(){
-            return roles;
-        }
-        public void setRoles(){
-            this.roles=roles;
-        }
+        return username;
+    }
+    public void setUsername(String username){
+        this.username=username;
+    }
+    public Set<Role> getRoles(){
+        return roles;
+    }
+    public void setRoles(){
+        this.roles=roles;
+    }
 }
