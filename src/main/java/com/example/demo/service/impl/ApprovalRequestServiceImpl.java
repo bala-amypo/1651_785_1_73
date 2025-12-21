@@ -1,11 +1,14 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.ApprovalRequest;
-import com.example.demo.repository.*;
+import com.example.demo.repository.ApprovalRequestRepository;
+import com.example.demo.repository.ApprovalActionRepository;
+import com.example.demo.repository.WorkflowStepConfigRepository;
+import com.example.demo.repository.WorkflowTemplateRepository;
 import com.example.demo.service.ApprovalRequestService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,26 +30,26 @@ public class ApprovalRequestServiceImpl implements ApprovalRequestService {
         this.workflowTemplateRepository = workflowTemplateRepository;
         this.approvalActionRepository = approvalActionRepository;
     }
-
     @Override
     public ApprovalRequest createRequest(ApprovalRequest request) {
-        request.setStatus("PENDING");
-        request.setCreatedAt(LocalDateTime.now());
-        request.setCurrentLevel(1);
-
-        return approvalRequestRepository.save(request);
+        List<ApprovalRequest> allRequests = approvalRequestRepository.findAll();
+        request.setId((long) (allRequests.size() + 1));
+        allRequests.add(request);
+        return request;
     }
 
     @Override
     public List<ApprovalRequest> getRequestsByRequester(Long requesterId) {
-        return approvalRequestRepository.findAll()
-                .stream()
-                .filter(r -> requesterId.equals(r.getRequesterId()))
-                .toList();
+        List<ApprovalRequest> allRequests = approvalRequestRepository.findAll();
+        List<ApprovalRequest> result = new ArrayList<>();
+        for (ApprovalRequest r : allRequests) {
+            if (requesterId.equals(r.getRequesterId())) result.add(r);
+        }
+        return result;
     }
 
     @Override
     public List<ApprovalRequest> getAllRequests() {
-        return approvalRequestRepository.findAll();
+        return new ArrayList<>(approvalRequestRepository.findAll());
     }
 }

@@ -2,13 +2,13 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User user, String roleName) {
-
         Role role = roleRepository.findByName(roleName)
                 .orElseGet(() -> {
                     Role r = new Role();
@@ -35,15 +34,19 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<>());
         user.getRoles().add(role);
 
-        return userRepository.save(user);
+        List<User> allUsers = userRepository.findAll();
+        user.setId((long) (allUsers.size() + 1));
+        allUsers.add(user);
+
+        return user;
     }
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findAll().stream()
-                .filter(u -> u.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
+        List<User> allUsers = userRepository.findAll();
+        for (User u : allUsers) {
+            if (u.getUsername().equals(username)) return u;
+        }
+        return null; 
     }
 }
