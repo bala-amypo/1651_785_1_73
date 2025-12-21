@@ -34,6 +34,6 @@ public class AuthController {
             throw new RuntimeException("Invalid username or password");
         }
 
-        return ResponseEntity.ok("Login successful (No DTO, No JWT)");
+        return ResponseEntity.ok("Login successful (No Encoder, No JWT)");
     }
 }
