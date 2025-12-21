@@ -5,25 +5,25 @@ import com.example.demo.repository.WorkflowStepConfigRepository;
 import com.example.demo.service.WorkflowStepConfigService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class WorkflowStepConfigServiceImpl implements WorkflowStepConfigService {
 
-    private final WorkflowStepConfigRepository repository;
+    private final WorkflowStepConfigRepository workflowStepConfigRepository;
 
-    public WorkflowStepConfigServiceImpl(WorkflowStepConfigRepository repository) {
-        this.repository = repository;
+    public WorkflowStepConfigServiceImpl(WorkflowStepConfigRepository workflowStepConfigRepository) {
+        this.workflowStepConfigRepository = workflowStepConfigRepository;
     }
 
     @Override
-    public List<WorkflowStepConfig> getStepsByTemplate(Long templateId) {
-        List<WorkflowStepConfig> allSteps = repository.findAll();
-        List<WorkflowStepConfig> result = new ArrayList<>();
-        for (WorkflowStepConfig s : allSteps) {
-            if (s.getTemplateId().equals(templateId)) result.add(s);
-        }
-        return result;
+    public WorkflowStepConfig createStep(WorkflowStepConfig step) {
+        return workflowStepConfigRepository.save(step);
+    }
+
+    @Override
+    public List<WorkflowStepConfig> getStepsForTemplate(Long templateId) {
+        return workflowStepConfigRepository
+                .findByTemplateIdOrderByLevelNumberAsc(templateId);
     }
 }
