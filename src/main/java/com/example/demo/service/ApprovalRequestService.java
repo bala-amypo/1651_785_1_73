@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.ApprovalRequest;
+import com.example.demo.entity.ApprovalRequest;
 
 import java.util.List;
 

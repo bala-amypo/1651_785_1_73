@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.ApprovalRequest;
+import com.example.demo.entity.ApprovalRequest;
 import com.example.demo.service.ApprovalRequestService;
 import org.springframework.web.bind.annotation.*;
 
