@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
@@ -16,10 +16,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public UserServiceImpl(
-            UserRepository userRepository,
-            RoleRepository roleRepository) {
-
+    public UserServiceImpl(UserRepository userRepository,
+                           RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -29,12 +27,11 @@ public class UserServiceImpl implements UserService {
 
         Role role = roleRepository.findByName(roleName)
                 .orElseGet(() -> {
-                    Role newRole = new Role();
-                    newRole.setName(roleName);
-                    return roleRepository.save(newRole);
+                    Role r = new Role();
+                    r.setName(roleName);
+                    return roleRepository.save(r);
                 });
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>());
         user.getRoles().add(role);
 
@@ -43,10 +40,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findAll()
-                .stream()
-                .filter(u -> username.equals(u.getUsername()) || username.equals(u.getEmail()))
+        return userRepository.findAll().stream()
+                .filter(u -> u.getUsername().equals(username))
                 .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
     }
 }
