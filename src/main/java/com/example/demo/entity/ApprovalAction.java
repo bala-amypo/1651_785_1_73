@@ -1,9 +1,9 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "approval_actions")
 public class ApprovalAction {
 
     @Id
@@ -12,7 +12,8 @@ public class ApprovalAction {
 
     private Long requestId;
     private Long approverId;
-    private Integer levelNumber;
+
+    private Integer level;      
     private String action;
     private String comments;
     private LocalDateTime actionDate;
@@ -28,8 +29,8 @@ public class ApprovalAction {
     public Long getApproverId() { return approverId; }
     public void setApproverId(Long approverId) { this.approverId = approverId; }
 
-    public Integer getLevelNumber() { return levelNumber; }
-    public void setLevelNumber(Integer levelNumber) { this.levelNumber = levelNumber; }
+    public Integer getLevel() { return level; }
+    public void setLevel(Integer level) { this.level = level; }
 
     public String getAction() { return action; }
     public void setAction(String action) { this.action = action; }
