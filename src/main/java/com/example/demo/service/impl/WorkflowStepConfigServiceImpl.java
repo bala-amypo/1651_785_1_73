@@ -12,7 +12,6 @@ public class WorkflowStepConfigServiceImpl implements WorkflowStepConfigService 
 
     private final WorkflowStepConfigRepository workflowStepConfigRepository;
 
-    // ⚠️ EXACT constructor order
     public WorkflowStepConfigServiceImpl(WorkflowStepConfigRepository workflowStepConfigRepository) {
         this.workflowStepConfigRepository = workflowStepConfigRepository;
     }

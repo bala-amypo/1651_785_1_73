@@ -14,7 +14,6 @@ public class WorkflowTemplateServiceImpl implements WorkflowTemplateService {
 
     private final WorkflowTemplateRepository workflowTemplateRepository;
 
-    // ⚠️ EXACT constructor order
     public WorkflowTemplateServiceImpl(WorkflowTemplateRepository workflowTemplateRepository) {
         this.workflowTemplateRepository = workflowTemplateRepository;
     }
