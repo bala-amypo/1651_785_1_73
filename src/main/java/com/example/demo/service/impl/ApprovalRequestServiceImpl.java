@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.ApprovalRequest;
+import com.example.demo.entity.ApprovalRequest;
 import com.example.demo.repository.*;
 import com.example.demo.service.ApprovalRequestService;
 import org.springframework.stereotype.Service;

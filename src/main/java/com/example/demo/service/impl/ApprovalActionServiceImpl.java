@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.ApprovalAction;
+import com.example.demo.entity.ApprovalAction;
 import com.example.demo.repository.ApprovalActionRepository;
 import com.example.demo.repository.ApprovalRequestRepository;
 import com.example.demo.service.ApprovalActionService;
