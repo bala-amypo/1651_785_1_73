@@ -23,7 +23,6 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    // ✅ LOGIN (Simple request params)
     @PostMapping("/login")
     public ResponseEntity<String> login(
             @RequestParam String username,
