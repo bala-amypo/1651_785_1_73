@@ -4,8 +4,8 @@ import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.AuthResponse;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.User;
-import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,36 +13,35 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
 
-    public AuthController(UserService userService,
-                          JwtTokenProvider jwtTokenProvider) {
+    public AuthController(UserService userService) {
         this.userService = userService;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
-
     @PostMapping("/register")
-    public User register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
 
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
 
-        return userService.registerUser(user, request.getRole());
-    }
+        userService.registerUser(user, request.getRole());
 
+        return ResponseEntity.ok("User registered successfully");
+    }
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
         User user = userService.findByUsername(request.getUsernameOrEmail());
-        String token = jwtTokenProvider.generateToken(user);
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new RuntimeException("Invalid username or password");
+        }
 
         AuthResponse response = new AuthResponse();
-        response.setToken(token);
         response.setUsername(user.getUsername());
-        response.setRoles(user.getRoles());
+        response.setMessage("Login successful (JWT not implemented)");
 
-        return response;
+        return ResponseEntity.ok(response);
     }
 }
