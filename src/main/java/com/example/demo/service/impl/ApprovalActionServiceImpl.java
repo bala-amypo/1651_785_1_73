@@ -12,7 +12,6 @@ public class ApprovalActionServiceImpl implements ApprovalActionService {
     private final ApprovalActionRepository approvalActionRepository;
     private final ApprovalRequestRepository approvalRequestRepository;
 
-    // ⚠️ EXACT constructor order
     public ApprovalActionServiceImpl(
             ApprovalActionRepository approvalActionRepository,
             ApprovalRequestRepository approvalRequestRepository) {

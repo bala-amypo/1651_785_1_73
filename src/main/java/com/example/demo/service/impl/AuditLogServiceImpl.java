@@ -12,7 +12,6 @@ public class AuditLogServiceImpl implements AuditLogService {
 
     private final AuditLogRecordRepository auditLogRecordRepository;
 
-    // ⚠️ EXACT constructor order
     public AuditLogServiceImpl(AuditLogRecordRepository auditLogRecordRepository) {
         this.auditLogRecordRepository = auditLogRecordRepository;
     }

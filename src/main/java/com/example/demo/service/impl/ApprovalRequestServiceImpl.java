@@ -16,7 +16,6 @@ public class ApprovalRequestServiceImpl implements ApprovalRequestService {
     private final WorkflowTemplateRepository workflowTemplateRepository;
     private final ApprovalActionRepository approvalActionRepository;
 
-    // ⚠️ EXACT constructor order
     public ApprovalRequestServiceImpl(
             ApprovalRequestRepository approvalRequestRepository,
             WorkflowStepConfigRepository workflowStepConfigRepository,

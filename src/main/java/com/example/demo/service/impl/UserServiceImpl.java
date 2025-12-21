@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // ⚠️ EXACT constructor order
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
