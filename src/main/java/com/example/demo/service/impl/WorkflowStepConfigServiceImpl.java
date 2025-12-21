@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.WorkflowStepConfig;
+import com.example.demo.entity.WorkflowStepConfig;
 import com.example.demo.repository.WorkflowStepConfigRepository;
 import com.example.demo.service.WorkflowStepConfigService;
 import org.springframework.stereotype.Service;
