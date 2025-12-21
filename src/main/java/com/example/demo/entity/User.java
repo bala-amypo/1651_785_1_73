@@ -27,8 +27,6 @@ public class User {
         this.roles = roles;
     }
 
-    // ✅ GETTERS & SETTERS (MUST BE OUTSIDE CONSTRUCTORS)
-
     public Long getId() {
         return id;
     }
