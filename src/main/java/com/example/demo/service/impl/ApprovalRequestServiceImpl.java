@@ -30,6 +30,7 @@ public class ApprovalRequestServiceImpl implements ApprovalRequestService {
         this.workflowTemplateRepository = workflowTemplateRepository;
         this.approvalActionRepository = approvalActionRepository;
     }
+
     @Override
     public ApprovalRequest createRequest(ApprovalRequest request) {
         List<ApprovalRequest> allRequests = approvalRequestRepository.findAll();

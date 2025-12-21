@@ -2,38 +2,26 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.ApprovalAction;
 import com.example.demo.repository.ApprovalActionRepository;
+import com.example.demo.repository.ApprovalRequestRepository;
 import com.example.demo.service.ApprovalActionService;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ApprovalActionServiceImpl implements ApprovalActionService {
 
     private final ApprovalActionRepository approvalActionRepository;
+    private final ApprovalRequestRepository approvalRequestRepository;
 
-    public ApprovalActionServiceImpl(ApprovalActionRepository approvalActionRepository) {
+    public ApprovalActionServiceImpl(
+            ApprovalActionRepository approvalActionRepository,
+            ApprovalRequestRepository approvalRequestRepository) {
+
         this.approvalActionRepository = approvalActionRepository;
+        this.approvalRequestRepository = approvalRequestRepository;
     }
 
     @Override
-    public ApprovalAction addAction(ApprovalAction action) {
-        List<ApprovalAction> allActions = approvalActionRepository.findAll();
-        action.setId((long) (allActions.size() + 1));
-        allActions.add(action);
-        return action;
-    }
-
-    @Override
-    public List<ApprovalAction> getActionsByLevelAndAction(Integer level, String actionName) {
-        List<ApprovalAction> allActions = approvalActionRepository.findAll();
-        List<ApprovalAction> result = new ArrayList<>();
-        for (ApprovalAction a : allActions) {
-            if (a.getLevel().equals(level) && a.getAction().equals(actionName)) {
-                result.add(a);
-            }
-        }
-        return result;
+    public ApprovalAction recordAction(ApprovalAction action) {
+        return approvalActionRepository.save(action);
     }
 }
