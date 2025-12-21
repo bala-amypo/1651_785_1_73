@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.WorkflowTemplate;
+import com.example.demo.entity.WorkflowTemplate;
 import com.example.demo.service.WorkflowTemplateService;
 import org.springframework.web.bind.annotation.*;
 
