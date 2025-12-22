@@ -1,3 +1,4 @@
+package com.example.demo.service;
 import com.example.demo.entity.WorkflowTemplate;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.WorkflowTemplateRepository;

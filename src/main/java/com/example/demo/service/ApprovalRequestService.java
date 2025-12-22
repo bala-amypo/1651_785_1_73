@@ -1,14 +1,23 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.ApprovalRequest;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.ApprovalRequestRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class ApprovalRequestService {
 
-public interface ApprovalRequestService {
+    private final ApprovalRequestRepository approvalRequestRepository;
 
-    ApprovalRequest createRequest(ApprovalRequest request);
+    public ApprovalRequestService(ApprovalRequestRepository approvalRequestRepository) {
+        this.approvalRequestRepository = approvalRequestRepository;
+    }
 
-    List<ApprovalRequest> getRequestsByRequester(Long requesterId);
-
-    List<ApprovalRequest> getAllRequests();
+    public ApprovalRequest getRequestById(Long id) {
+        return approvalRequestRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("ApprovalRequest not found with id: " + id));
+    }
 }
+
