@@ -1,19 +1,20 @@
-package com.example.demo.service;
-
 import com.example.demo.entity.WorkflowTemplate;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.WorkflowTemplateRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+@Service
+public class WorkflowTemplateService {
 
-public interface WorkflowTemplateService {
+    private final WorkflowTemplateRepository repository;
 
-    WorkflowTemplate createTemplate(WorkflowTemplate template);
+    public WorkflowTemplateService(WorkflowTemplateRepository repository) {
+        this.repository = repository;
+    }
 
-    Optional<WorkflowTemplate> getTemplateById(Long id);
-
-    List<WorkflowTemplate> getAllTemplates();
-
-    WorkflowTemplate updateTemplate(Long id, WorkflowTemplate template);
-
-    WorkflowTemplate activateTemplate(Long id, boolean active);
+    public WorkflowTemplate getTemplateById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("WorkflowTemplate not found with id: " + id));
+    }
 }
