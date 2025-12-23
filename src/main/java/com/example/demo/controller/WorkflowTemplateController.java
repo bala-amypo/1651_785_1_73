@@ -23,12 +23,13 @@ public class WorkflowTemplateController {
     }
 
     @GetMapping("/{id}")
-    public Optional<WorkflowTemplate> getTemplateById(@PathVariable Long id) {
+    public Optional<WorkflowTemplate> getTemplateById1(@PathVariable Long id) {
         return workflowTemplateService.getTemplateById(id);
     }
 
     @GetMapping
     public List<WorkflowTemplate> getAllTemplates() {
+
         return workflowTemplateService.getAllTemplates();
     }
 

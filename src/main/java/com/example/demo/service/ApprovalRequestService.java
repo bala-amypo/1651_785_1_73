@@ -11,5 +11,5 @@ public interface ApprovalRequestService {
 
     List<ApprovalRequest> getAllRequests();
 
-    ApprovalRequest getRequestById(Long id);
+    // ApprovalRequest getRequestById(Long id);
 }
