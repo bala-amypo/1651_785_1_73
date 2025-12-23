@@ -9,7 +9,7 @@ public class WorkflowStepConfig {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long templateId;     // ❗ MUST be Long, NOT @ManyToOne
+    private Long templateId;     
     private Integer levelNumber;
     private String approverRole;
     private Boolean isFinalStep;
