@@ -1,9 +1,8 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "audit_log_records")
 public class AuditLogRecord {
 
     @Id
@@ -13,9 +12,6 @@ public class AuditLogRecord {
     private Long requestId;
     private String eventType;
     private String details;
-    private LocalDateTime loggedAt;
-
-    public AuditLogRecord() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -28,7 +24,4 @@ public class AuditLogRecord {
 
     public String getDetails() { return details; }
     public void setDetails(String details) { this.details = details; }
-
-    public LocalDateTime getLoggedAt() { return loggedAt; }
-    public void setLoggedAt(LocalDateTime loggedAt) { this.loggedAt = loggedAt; }
 }

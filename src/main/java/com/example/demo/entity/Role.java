@@ -1,11 +1,9 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "roles",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name")
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Role {
 
     @Id
@@ -13,8 +11,6 @@ public class Role {
     private Long id;
 
     private String name;
-
-    public Role() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
