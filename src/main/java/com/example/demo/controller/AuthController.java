@@ -1,39 +1,38 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.RegisterRequest;
+import com.example.demo.model.User;
+import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
+    public User register(@RequestBody RegisterRequest request) {
 
-        userService.registerUser(user, "USER");
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
 
-        return ResponseEntity.ok("User registered successfully");
+        return userService.registerUser(user, request.getRole());
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(
-            @RequestParam String username,
-            @RequestParam String password) {
+    public String login(@RequestBody AuthRequest request) {
 
-        User user = userService.findByUsername(username);
-
-        if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid username or password");
-        }
-
-        return ResponseEntity.ok("Login successful (No Encoder, No JWT)");
+        User user = userService.findByUsername(request.getUsernameOrEmail());
+        return jwtTokenProvider.generateToken(user);
     }
 }
