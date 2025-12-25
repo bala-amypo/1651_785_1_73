@@ -1,9 +1,8 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "approval_requests")
 public class ApprovalRequest {
 
     @Id
@@ -17,11 +16,7 @@ public class ApprovalRequest {
     @Lob
     private String requestPayloadJson;
 
-    private String status;
-    private Integer currentLevel;
-    private LocalDateTime createdAt;
-
-    public ApprovalRequest() {}
+    private String status = "PENDING";
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -40,10 +35,4 @@ public class ApprovalRequest {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-
-    public Integer getCurrentLevel() { return currentLevel; }
-    public void setCurrentLevel(Integer currentLevel) { this.currentLevel = currentLevel; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
