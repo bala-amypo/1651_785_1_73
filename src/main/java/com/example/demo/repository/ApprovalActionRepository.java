@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.ApprovalAction;
+import com.example.demo.entity.ApprovalAction;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
