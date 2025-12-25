@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.WorkflowTemplate;
 import com.example.demo.repository.WorkflowTemplateRepository;
 import com.example.demo.service.WorkflowTemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,8 @@ import java.util.Optional;
 @Service
 public class WorkflowTemplateServiceImpl implements WorkflowTemplateService {
 
-    private final WorkflowTemplateRepository repository;
-
-    public WorkflowTemplateServiceImpl(WorkflowTemplateRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private WorkflowTemplateRepository repository;
 
     @Override
     public WorkflowTemplate createTemplate(WorkflowTemplate template) {
@@ -28,13 +26,19 @@ public class WorkflowTemplateServiceImpl implements WorkflowTemplateService {
     }
 
     @Override
-    public List<WorkflowTemplate> getAllTemplates() {
-        return repository.findAll();
+    public WorkflowTemplate updateTemplate(Long id, WorkflowTemplate template) {
+        return repository.save(template);
     }
 
     @Override
-    public WorkflowTemplate updateTemplate(Long id, WorkflowTemplate template) {
-        template.setId(id);
-        return repository.save(template);
+    public WorkflowTemplate activateTemplate(Long id, boolean active) {
+        WorkflowTemplate t = repository.findById(id).orElseThrow();
+        t.setActive(active);
+        return repository.save(t);
+    }
+
+    @Override
+    public List<WorkflowTemplate> getAllTemplates() {
+        return repository.findAll();
     }
 }

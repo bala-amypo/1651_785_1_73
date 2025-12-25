@@ -4,5 +4,5 @@ import com.example.demo.entity.ApprovalAction;
 
 public interface ApprovalActionService {
 
-    ApprovalAction recordAction(ApprovalAction action);
+    ApprovalAction save(ApprovalAction action);
 }

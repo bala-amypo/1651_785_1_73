@@ -2,26 +2,18 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.ApprovalAction;
 import com.example.demo.repository.ApprovalActionRepository;
-import com.example.demo.repository.ApprovalRequestRepository;
 import com.example.demo.service.ApprovalActionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApprovalActionServiceImpl implements ApprovalActionService {
 
-    private final ApprovalActionRepository approvalActionRepository;
-    private final ApprovalRequestRepository approvalRequestRepository;
-
-    public ApprovalActionServiceImpl(
-            ApprovalActionRepository approvalActionRepository,
-            ApprovalRequestRepository approvalRequestRepository) {
-
-        this.approvalActionRepository = approvalActionRepository;
-        this.approvalRequestRepository = approvalRequestRepository;
-    }
+    @Autowired
+    private ApprovalActionRepository repository;
 
     @Override
-    public ApprovalAction recordAction(ApprovalAction action) {
-        return approvalActionRepository.save(action);
+    public ApprovalAction save(ApprovalAction action) {
+        return repository.save(action);
     }
 }
