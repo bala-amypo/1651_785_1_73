@@ -1,11 +1,11 @@
+// src/main/java/com/example/demo/entity/WorkflowTemplate.java
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import java.util.Objects;
 
 @Entity
 @Table(name = "workflow_templates")
-@Data
 public class WorkflowTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,29 @@ public class WorkflowTemplate {
     private Integer totalLevels;
     
     private Boolean active = true;
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getTemplateName() { return templateName; }
+    public void setTemplateName(String templateName) { this.templateName = templateName; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public Integer getTotalLevels() { return totalLevels; }
+    public void setTotalLevels(Integer totalLevels) { this.totalLevels = totalLevels; }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkflowTemplate that = (WorkflowTemplate) o;
+        return Objects.equals(id, that.id);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -1,3 +1,4 @@
+// src/main/java/com/example/demo/entity/User.java
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -40,7 +41,10 @@ public class User {
     public Set<Role> getRoles() { return roles; }
     public void setRoles(Set<Role> roles) { this.roles = roles; }
     
-    public void getRoles(Set<Role> role) { this.roles.add(role); }
+    // FIXED: Correct method to add role
+    public void addRole(Role role) { 
+        this.roles.add(role); 
+    }
     
     @Override
     public boolean equals(Object o) {

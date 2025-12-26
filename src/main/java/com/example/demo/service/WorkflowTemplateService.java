@@ -22,14 +22,22 @@ public class WorkflowTemplateService {
     }
     
     public WorkflowTemplate updateTemplate(Long id, WorkflowTemplate template) {
-        template.setId(id);
-        return templateRepository.save(template);
+        Optional<WorkflowTemplate> existing = templateRepository.findById(id);
+        if (existing.isPresent()) {
+            template.setId(id);
+            return templateRepository.save(template);
+        }
+        return null;
     }
     
     public WorkflowTemplate activateTemplate(Long id, boolean active) {
-        WorkflowTemplate template = templateRepository.findById(id).orElseThrow();
-        template.setActive(active);
-        return templateRepository.save(template);
+        Optional<WorkflowTemplate> existing = templateRepository.findById(id);
+        if (existing.isPresent()) {
+            WorkflowTemplate template = existing.get();
+            template.setActive(active);
+            return templateRepository.save(template);
+        }
+        return null;
     }
     
     public List<WorkflowTemplate> getAllTemplates() {
