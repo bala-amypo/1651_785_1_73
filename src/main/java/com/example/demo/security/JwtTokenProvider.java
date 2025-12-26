@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/security/JwtTokenProvider.java
 package com.example.demo.security;
 
 import com.example.demo.model.User;
@@ -9,12 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
 
-    // We only use PasswordEncoder so that in the flow test
-    // the encoded password is different from raw
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Very simple token format: "uid:<id>:uname:<username>:email:<email>"
     public String generateToken(User user) {
         return "uid:" + user.getId()
                 + ":uname:" + user.getUsername()
