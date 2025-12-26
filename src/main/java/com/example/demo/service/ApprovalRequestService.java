@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ApprovalRequest;
+import com.example.demo.model.ApprovalRequest;
 import com.example.demo.repository.ApprovalRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

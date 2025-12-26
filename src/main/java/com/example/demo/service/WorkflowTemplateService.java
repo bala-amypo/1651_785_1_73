@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.WorkflowTemplate;
+import com.example.demo.model.WorkflowTemplate;
 import com.example.demo.repository.WorkflowTemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

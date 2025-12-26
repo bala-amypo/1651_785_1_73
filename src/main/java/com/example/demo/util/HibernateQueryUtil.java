@@ -1,6 +1,6 @@
 package com.example.demo.util;
 
-import com.example.demo.entity.ApprovalAction;
+import com.example.demo.model.ApprovalAction;
 import com.example.demo.repository.ApprovalActionRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
