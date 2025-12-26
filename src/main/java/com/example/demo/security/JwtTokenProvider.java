@@ -3,8 +3,8 @@ package com.example.demo.security;
 import com.example.demo.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 public class JwtTokenProvider {
     
-    private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final SecretKey secretKey = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
     private final long expirationTime = 86400000; // 24 hours
     
     public String generateToken(User user) {
