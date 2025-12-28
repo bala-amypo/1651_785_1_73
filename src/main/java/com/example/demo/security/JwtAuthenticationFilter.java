@@ -31,17 +31,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        // Read Authorization header
         String header = request.getHeader(SecurityConstants.HEADER_STRING);
         String token = null;
+
         if (StringUtils.hasText(header) && header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             token = header.substring(SecurityConstants.TOKEN_PREFIX.length());
         }
 
-        if (token != null && tokenProvider.validateToken(token)) {
-            Long userId = tokenProvider.getUserIdFromToken(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(
-                    String.valueOf(userId)
-            );
+        // Validate token and set authentication
+        if (token != null && tokenProvider.validateToken(token)
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            // Get username (email) from token
+            String username = tokenProvider.getUsername(token);
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
                             userDetails,
