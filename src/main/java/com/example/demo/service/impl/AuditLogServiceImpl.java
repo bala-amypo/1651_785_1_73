@@ -1,28 +1,21 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.AuditLogRecord;
-import com.example.demo.repository.AuditLogRecordRepository;
+import com.example.demo.model.AuditLog;
+import com.example.demo.repository.AuditLogRepository;
 import com.example.demo.service.AuditLogService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuditLogServiceImpl implements AuditLogService {
 
-    private final AuditLogRecordRepository auditRepository;
+    private final AuditLogRepository auditLogRepository;
 
-    public AuditLogServiceImpl(AuditLogRecordRepository auditRepository) {
-        this.auditRepository = auditRepository;
+    public AuditLogServiceImpl(AuditLogRepository auditLogRepository) {
+        this.auditLogRepository = auditLogRepository;
     }
 
     @Override
-    public AuditLogRecord saveLog(AuditLogRecord record) {
-        return auditRepository.save(record);
-    }
-
-    @Override
-    public List<AuditLogRecord> getLogsForRequest(Long requestId) {
-        return auditRepository.findByRequestId(requestId);
+    public AuditLog saveLog(AuditLog log) {
+        return auditLogRepository.save(log);
     }
 }
