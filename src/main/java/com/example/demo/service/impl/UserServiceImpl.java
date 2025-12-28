@@ -31,8 +31,15 @@ public class UserServiceImpl implements UserService {
                     r.setName(roleName);
                     return roleRepository.save(r);
                 });
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(role);
+
+        boolean alreadyHasRole = user.getRoles().stream()
+                .anyMatch(r -> r.getName().equals(role.getName()));
+        if (!alreadyHasRole) {
+            user.getRoles().add(role);
+        }
+
         return userRepository.save(user);
     }
 
@@ -41,4 +48,3 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username).orElseThrow();
     }
 }
-
