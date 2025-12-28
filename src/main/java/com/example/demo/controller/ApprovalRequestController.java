@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.ApprovalRequest;
 import com.example.demo.service.ApprovalRequestService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,25 +10,22 @@ import java.util.List;
 @RequestMapping("/api/requests")
 public class ApprovalRequestController {
 
-    private final ApprovalRequestService requestService;
+    private final ApprovalRequestService service;
 
-    public ApprovalRequestController(ApprovalRequestService requestService) {
-        this.requestService = requestService;
+    public ApprovalRequestController(ApprovalRequestService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<ApprovalRequest> createRequest(@RequestBody ApprovalRequest request) {
-        ApprovalRequest created = requestService.createRequest(request);
-        return ResponseEntity.ok(created);
+    public ApprovalRequest create(@RequestBody ApprovalRequest r) {
+        return service.createRequest(r);
     }
 
     @GetMapping
-    public ResponseEntity<List<ApprovalRequest>> listRequests() {
-        return ResponseEntity.ok(requestService.getAllRequests());
-    }
-
-    @GetMapping("/requester/{requesterId}")
-    public ResponseEntity<List<ApprovalRequest>> listRequestsByRequester(@PathVariable Long requesterId) {
-        return ResponseEntity.ok(requestService.getRequestsByRequester(requesterId));
+    public List<ApprovalRequest> list(@RequestParam(required = false) Long requesterId) {
+        if (requesterId != null) {
+            return service.getRequestsByRequester(requesterId);
+        }
+        return service.getAllRequests();
     }
 }
