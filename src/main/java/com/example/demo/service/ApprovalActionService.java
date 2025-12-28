@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ApprovalActionService {
     ApprovalAction saveAction(ApprovalAction action);
-    List<ApprovalAction> findByLevelAndAction(int levelNumber, String action);
+    List<ApprovalAction> findByLevelNumberAndAction(int levelNumber, String action);
 }
