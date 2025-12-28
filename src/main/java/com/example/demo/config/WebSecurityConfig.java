@@ -48,11 +48,5 @@ public class WebSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 }
-``]
-
----
-
-## Swagger config  
-`src/main/java/com/example/demo/config/SwaggerConfig.java`
 
 
