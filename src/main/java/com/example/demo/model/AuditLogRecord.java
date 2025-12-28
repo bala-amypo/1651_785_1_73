@@ -1,23 +1,29 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "audit_log_records")
 public class AuditLogRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long requestId;
+    private Long userId;
 
-    @Column(nullable = false)
-    private String eventType;
+    private String action;
 
-    @Column(length = 2000)
-    private String details;
+    private LocalDateTime createdAt;
+
+    public AuditLogRecord() {
+    }
+
+    public AuditLogRecord(Long userId, String action) {
+        this.userId = userId;
+        this.action = action;
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
@@ -27,27 +33,27 @@ public class AuditLogRecord {
         this.id = id;
     }
 
-    public Long getRequestId() {
-        return requestId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setRequestId(Long requestId) {
-        this.requestId = requestId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getEventType() {
-        return eventType;
+    public String getAction() {
+        return action;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setAction(String action) {
+        this.action = action;
     }
 
-    public String getDetails() {
-        return details;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
