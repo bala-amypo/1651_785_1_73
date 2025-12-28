@@ -27,7 +27,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/auth/**",
+                                "/auth/**",           // <- changed from /api/auth/**
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
@@ -48,5 +48,3 @@ public class WebSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 }
-
-
