@@ -35,7 +35,7 @@ public class WorkflowTemplateController {
         return ResponseEntity.ok(templateService.updateTemplate(id, template));
     }
 
-    @PatchMapping("/{id}/active")
+    @PutMapping("/{id}/active")
     public ResponseEntity<WorkflowTemplate> activate(@PathVariable Long id,
                                                      @RequestParam boolean active) {
         return ResponseEntity.ok(templateService.activateTemplate(id, active));
