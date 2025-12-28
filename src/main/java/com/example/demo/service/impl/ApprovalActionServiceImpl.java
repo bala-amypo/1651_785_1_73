@@ -22,7 +22,7 @@ public class ApprovalActionServiceImpl implements ApprovalActionService {
     }
 
     @Override
-    public List<ApprovalAction> findByLevelNumberAndAction(int levelNumber, String action) {
-        return actionRepository.findByLevelNumberAndAction(levelNumber, action);
+    public List<ApprovalAction> findByLevelAndAction(int levelNumber, String action) {
+        return actionRepository.findByLevelAndAction(levelNumber, action);
     }
 }
