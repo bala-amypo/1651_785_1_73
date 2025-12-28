@@ -1,3 +1,4 @@
+// AuditLogServiceImpl.java
 package com.example.demo.service.impl;
 
 import com.example.demo.model.AuditLogRecord;
@@ -10,12 +11,12 @@ public class AuditLogServiceImpl implements AuditLogService {
 
     private final AuditLogRecordRepository auditLogRepository;
 
-    public AuditLogServiceImpl(AuditLogRepository auditLogRepository) {
+    public AuditLogServiceImpl(AuditLogRecordRepository auditLogRepository) {
         this.auditLogRepository = auditLogRepository;
     }
 
     @Override
-    public AuditLog saveLog(AuditLog log) {
+    public AuditLogRecord saveLog(AuditLogRecord log) {
         return auditLogRepository.save(log);
     }
 }
