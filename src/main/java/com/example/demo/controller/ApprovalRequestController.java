@@ -18,17 +18,18 @@ public class ApprovalRequestController {
     }
 
     @PostMapping
-    public ResponseEntity<ApprovalRequest> create(@RequestBody ApprovalRequest request) {
-        return ResponseEntity.ok(requestService.createRequest(request));
-    }
-
-    @GetMapping("/requester/{id}")
-    public ResponseEntity<List<ApprovalRequest>> byRequester(@PathVariable Long id) {
-        return ResponseEntity.ok(requestService.getRequestsByRequester(id));
+    public ResponseEntity<ApprovalRequest> createRequest(@RequestBody ApprovalRequest request) {
+        ApprovalRequest created = requestService.createRequest(request);
+        return ResponseEntity.ok(created);
     }
 
     @GetMapping
-    public ResponseEntity<List<ApprovalRequest>> all() {
+    public ResponseEntity<List<ApprovalRequest>> listRequests() {
         return ResponseEntity.ok(requestService.getAllRequests());
+    }
+
+    @GetMapping("/requester/{requesterId}")
+    public ResponseEntity<List<ApprovalRequest>> listRequestsByRequester(@PathVariable Long requesterId) {
+        return ResponseEntity.ok(requestService.getRequestsByRequester(requesterId));
     }
 }

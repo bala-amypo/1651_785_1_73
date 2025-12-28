@@ -16,7 +16,8 @@ public class AuthController {
     private final UserService userService;
     private final JwtTokenProvider tokenProvider;
 
-    public AuthController(UserService userService, JwtTokenProvider tokenProvider) {
+    public AuthController(UserService userService,
+                          JwtTokenProvider tokenProvider) {
         this.userService = userService;
         this.tokenProvider = tokenProvider;
     }
