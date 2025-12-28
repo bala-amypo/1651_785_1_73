@@ -10,7 +10,7 @@ public class WorkflowTemplate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "template_name", nullable = false)
+    @Column(name = "template_name")
     private String templateName;
 
     @Column(length = 1000)
