@@ -18,31 +18,34 @@ public class WorkflowTemplateController {
     }
 
     @PostMapping
-    public ResponseEntity<WorkflowTemplate> create(@RequestBody WorkflowTemplate template) {
-        return ResponseEntity.ok(templateService.createTemplate(template));
+    public ResponseEntity<WorkflowTemplate> createTemplate(@RequestBody WorkflowTemplate template) {
+        WorkflowTemplate created = templateService.createTemplate(template);
+        return ResponseEntity.ok(created);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WorkflowTemplate> get(@PathVariable Long id) {
+    public ResponseEntity<WorkflowTemplate> getTemplate(@PathVariable Long id) {
         return templateService.getTemplateById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WorkflowTemplate> update(@PathVariable Long id,
-                                                   @RequestBody WorkflowTemplate template) {
-        return ResponseEntity.ok(templateService.updateTemplate(id, template));
-    }
-
-    @PutMapping("/{id}/active")
-    public ResponseEntity<WorkflowTemplate> activate(@PathVariable Long id,
-                                                     @RequestParam boolean active) {
-        return ResponseEntity.ok(templateService.activateTemplate(id, active));
+    public ResponseEntity<WorkflowTemplate> updateTemplate(@PathVariable Long id,
+                                                           @RequestBody WorkflowTemplate template) {
+        WorkflowTemplate updated = templateService.updateTemplate(id, template);
+        return ResponseEntity.ok(updated);
     }
 
     @GetMapping
-    public ResponseEntity<List<WorkflowTemplate>> list() {
+    public ResponseEntity<List<WorkflowTemplate>> listTemplates() {
         return ResponseEntity.ok(templateService.getAllTemplates());
+    }
+
+    @PutMapping("/{id}/active")
+    public ResponseEntity<WorkflowTemplate> updateActive(@PathVariable Long id,
+                                                         @RequestParam boolean active) {
+        WorkflowTemplate updated = templateService.activateTemplate(id, active);
+        return ResponseEntity.ok(updated);
     }
 }
