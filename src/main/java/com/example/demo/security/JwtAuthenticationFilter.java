@@ -36,17 +36,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = null;
 
         if (StringUtils.hasText(header) && header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+            // strip "Bearer " prefix
             token = header.substring(SecurityConstants.TOKEN_PREFIX.length());
         }
 
-        // Validate token and set authentication
-        if (token != null && tokenProvider.validateToken(token)
+        // If we have a token and no authentication yet, validate and authenticate
+        if (token != null
+                && tokenProvider.validateToken(token)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            // Get username (email) from token
-            String username = tokenProvider.getUsername(token);
+            // Your provider stores id|email|roles -> we extract user id
+            Long userId = tokenProvider.getUserIdFromToken(token);
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            // IMPORTANT: CustomUserDetailsService must load by this id string
+            UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(userId));
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
