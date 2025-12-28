@@ -10,16 +10,12 @@ public class ApprovalAction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Long requestId;
 
-    @Column(nullable = false)
     private Long approverId;
 
-    @Column(nullable = false)
     private Integer levelNumber;
 
-    @Column(nullable = false)
     private String action;
 
     public Long getId() {
