@@ -1,36 +1,41 @@
 package com.example.demo.security;
 
 import com.example.demo.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public String generateToken(User user) {
-        return "uid:" + user.getId()
-                + ":uname:" + user.getUsername()
-                + ":email:" + user.getEmail();
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + SecurityConstants.JWT_EXPIRATION_MS);
+        return Jwts.builder()
+                .setSubject(user.getId().toString())
+                .claim("username", user.getUsername())
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS256, SecurityConstants.JWT_SECRET)
+                .compact();
     }
 
     public Long getUserIdFromToken(String token) {
-        // token parts: [0]=uid, [1]=<id>, [2]=uname, [3]=<username>, [4]=email, [5]=<email>
-        String[] parts = token.split(":");
-        if (parts.length < 2 || !"uid".equals(parts[0])) {
-            throw new IllegalArgumentException("Invalid token");
-        }
-        return Long.parseLong(parts[1]);
+        Claims claims = Jwts.parser()
+                .setSigningKey(SecurityConstants.JWT_SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+        return Long.parseLong(claims.getSubject());
     }
 
     public boolean validateToken(String token) {
         try {
-            Long id = getUserIdFromToken(token);
-            return id != null && id > 0;
-        } catch (Exception e) {
+            Jwts.parser().setSigningKey(SecurityConstants.JWT_SECRET).parseClaimsJws(token);
+            return true;
+        } catch (Exception ex) {
             return false;
         }
     }
