@@ -10,6 +10,13 @@ public class AuditLogRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // fields inferred from tests
+    private Long requestId;
+
+    private String eventType;
+
+    private String details;
+
     private Long userId;
 
     private String action;
@@ -25,12 +32,38 @@ public class AuditLogRecord {
         this.createdAt = LocalDateTime.now();
     }
 
+    // getters and setters
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(Long requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public Long getUserId() {
