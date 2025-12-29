@@ -26,15 +26,18 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // OPEN auth controller
+                        .requestMatchers("/api/auth/**", "/auth/**").permitAll()
+                        // OPEN Swagger / OpenAPI
                         .requestMatchers(
-                                "/api/auth/**",   
-                                "/auth/**",      
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
+                        // everything else requires authentication
                         .anyRequest().authenticated()
                 );
+
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
